@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getValues } from '../../selectors/';
 
 import NetValue from './NetValue';
@@ -23,7 +24,9 @@ class Dashboard extends Component {
       <div>
         <NetValue netValue={this.calculateTotal(this.props.securities)} />    
         {this.props.securities.map(({ ticker, price, quantity, isUp}) => (
-          <Card ticker={ticker} price={price} quantity={quantity} isUp={isUp} key={ticker}/>
+          <Link to={`security/${ticker}`} key={ticker}>
+            <Card ticker={ticker} price={price} quantity={quantity} isUp={isUp} />
+          </Link>
         )) }
         <Button />
       </div>

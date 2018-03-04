@@ -8,18 +8,10 @@ const INITIAL_STATE = {
     ticker: '',
     purchasePrice: '',
     quantity: '',
+    success: true,
   },
-  securities: {
-    MSFT: 95.42,
-    COKE: 185.62,
-    MDB: 30.87,
-  },
-  transactions: [
-    { ticker: 'MSFT', purchasePrice: 94.08, quantity: 3, group: 'test' },
-    { ticker: 'MSFT', purchasePrice: 105.15, quantity: 1, group: 'test' },
-    { ticker: 'COKE', purchasePrice: 182.17, quantity: 18, group: 'test' },
-    { ticker: 'MDB', purchasePrice: 31.82, quantity: 10, group: 'test' },
-  ],
+  securities: {},
+  transactions: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -36,8 +28,12 @@ export default (state = INITIAL_STATE, action) => {
 
     case ADD_TRANSACTION:
       /** Add to Transaction array */
-      const transaction = { ...action.payload, uuid: uuid() };
-      console.log('reducer', transaction);
+      const transaction = { 
+        ...action.payload,
+        quantity: parseInt(action.payload.quantity, 10),
+        purchasePrice: parseFloat(action.payload.purchasePrice),
+        uuid: uuid()
+      };
       return { 
         ...state,
         transaction: {
@@ -45,6 +41,11 @@ export default (state = INITIAL_STATE, action) => {
           ticker: '',
           purchasePrice: '',
           quantity: '',
+          success: true,
+        },
+        securities: {
+          ...state.securities,
+          [transaction.ticker]: ([transaction.ticker] in state.securities) ? state.securities[transaction.ticker] : 0,
         },
         transactions: [...state.transactions, transaction] 
       };

@@ -7,6 +7,7 @@ export default (props) => (
         className='button is-primary is-medium'
         style={{ width: '100%' }}
         onClick={props.onClick}
+        type={props.type}
       >
         {props.text}
       </button>

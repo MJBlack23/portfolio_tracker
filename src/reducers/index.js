@@ -1,14 +1,15 @@
 import { createStore, combineReducers } from 'redux';
-import securities from './securities';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const defaultReducer = () => null;
+import securities from './securities';
+const persistConfig = { key: 'root', storage };
 
 const reducers = combineReducers({
-  default: defaultReducer,
-  securities,
+  securities: securities,
 });
 
-const store = createStore(reducers);
+const persistReducers = persistReducer(persistConfig, reducers);
 
-
-export default store;
+export const store = createStore(persistReducers);
+export const persistor = persistStore(store);

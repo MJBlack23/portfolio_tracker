@@ -13,8 +13,9 @@ class Navbar extends Component {
 
   render() {
     const displayClass = this.state.displayMenu ? 'is-active' : '';
+    //style={{ borderBottomColor: '#eee', borderBottomWidth: 2, borderBottomStyle: 'solid'}}
     return (
-      <div className='navbar is-primary' style={{ borderBottomColor: '#eee', borderBottomWidth: 2, borderBottomStyle: 'solid'}}>
+      <div className='navbar is-primary'>
         <div className='container is-fluid is-mobile'>
           <div className='navbar-brand'>
             <Link to='/' className='navbar-item'>
