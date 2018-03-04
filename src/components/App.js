@@ -5,24 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { store } from '../reducers/';
 
-import Navbar from './Navbar/';
-import Routes from './Routes/';
+import Main from './Main';
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Provider store={store}>
-          {/* <PersistGate loading={null} persistor={persistor}> */}
-          <div>
-            <Navbar />
-            <Routes />
-          </div>
-          {/* </PersistGate> */}
-        </Provider>
-      </BrowserRouter>
-    );
-  }
-}
-
-export default App;
+export default () => (
+  <Provider store={store}>
+    <Main />
+  </Provider>
+);

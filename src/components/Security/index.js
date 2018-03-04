@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getValues } from '../../selectors/';
 
 import Summary from './Summary/';
 import Snapshot from './Snapshot';
@@ -7,11 +9,15 @@ import Transactions from './Transactions';
 
 class Security extends Component {
   render() {
-    const rando = [5, 7, 6, 3, 10, 15, 37];
     const { ticker } = this.props.match.params;
+    const [security] = this.props.securities.filter(s => s.ticker === ticker);
+    if (!security) {
+      return null;
+    }
+    console.log(security);
     return (
-      <div>
-        <Summary ticker={ticker} data={rando}/>
+      <div style={{ paddingBottom: 50 }}>
+        <Summary security={security} />
 
         <Snapshot />
 
@@ -21,4 +27,10 @@ class Security extends Component {
   }
 }
 
-export default Security;
+const mapStateToProps = (state) => {
+  return {
+    securities: getValues(state)
+  }
+}
+
+export default connect(mapStateToProps)(Security);

@@ -14,9 +14,12 @@ export const getValues = createSelector(
         exists.quantity += transaction.quantity;
         exists.purchasePrice = (exists.purchasePrice + transaction.purchasePrice) / exists.quantity;
       } else {
+        const price = securities[transaction.ticker] ? securities[transaction.ticker].lastUpdate.price : transaction.purchasePrice;
         response.push({
           ...transaction,
-          price: securities[transaction.ticker] ? securities[transaction.ticker] : transaction.purchasePrice,
+          price,
+          lastUpdate: securities[transaction.ticker].lastUpdate.time,
+          history: securities[transaction.ticker].history || [],
         });
       }
     });

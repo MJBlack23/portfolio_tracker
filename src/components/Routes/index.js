@@ -8,7 +8,7 @@ import Security from '../Security';
 const Routes = () => (
   <div>
     <Route exact path='/' component={Dashboard} />
-    <Route exact path='/security/new' component={NewTransaction} />
+    <Route exact path='/security/' component={NewTransaction} />
     <Route exact path='/security/:ticker' component={Security} />
   </div>
 )

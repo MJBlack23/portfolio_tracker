@@ -1,6 +1,7 @@
+import moment from 'moment';
 import uuid from 'uuid/v4';
 
-import { ADD_TRANSACTION, REMOVE_TRANSACTION, UPDATE_FIELD } from '../actions/types';
+import { ADD_TRANSACTION, REMOVE_TRANSACTION, UPDATE_FIELD, UPDATE_SECURITY } from '../actions/types';
 
 const INITIAL_STATE = {
   transaction: {
@@ -34,6 +35,14 @@ export default (state = INITIAL_STATE, action) => {
         purchasePrice: parseFloat(action.payload.purchasePrice),
         uuid: uuid()
       };
+      const defaultSecurity = {
+        ticker: transaction.ticker,
+        lastUpdate: {
+          price: parseFloat(action.payload.purchasePrice),
+          time: moment(),
+        },
+        history: [],
+      };
       return { 
         ...state,
         transaction: {
@@ -45,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         securities: {
           ...state.securities,
-          [transaction.ticker]: ([transaction.ticker] in state.securities) ? state.securities[transaction.ticker] : 0,
+          [transaction.ticker]: ([transaction.ticker] in state.securities) ? state.securities[transaction.ticker] : defaultSecurity,
         },
         transactions: [...state.transactions, transaction] 
       };
@@ -53,6 +62,15 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_TRANSACTION:
       /** Remove from Transaction Array */
       return { ...state, transactions: this.state.transactions.filter(t => t.uuid !== action.payload) };
+
+    case UPDATE_SECURITY:
+      return {
+        ...state,
+        securities: {
+          ...state.securities,
+          [action.payload.ticker]: action.payload
+        }
+      }
 
 
     default:

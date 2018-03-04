@@ -10,26 +10,26 @@ export default (props) => (
           <div className='level-item'>
             <div>
               Buy
-                  </div>
+            </div>
           </div>
 
           <div className='level-item'>
             <div>
               8
-                  </div>
+            </div>
           </div>
 
           <div className='level-item'>
             <div>
               $ 96.78
-                  </div>
+            </div>
           </div>
 
 
           <div className='level-item'>
             <div>
               8/9/17
-                  </div>
+            </div>
           </div>
         </div>
 

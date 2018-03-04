@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 
@@ -6,9 +7,9 @@ export default (props) => (
   <section className='hero is-primary'>
     <div className='hero-body'>
       <div className='container'>
-        <h3 className='heading has-text-centered'>{props.ticker}</h3>
-        <h1 className='title is-2 has-text-centered'>$ 145.67</h1>
-        <Sparklines data={props.data}>
+        <h3 className='heading has-text-centered'>{props.security.ticker}</h3>
+        <h1 className='title is-2 has-text-centered'>$ {(props.security.price * props.security.quantity).toFixed(2)}</h1>
+        <Sparklines data={props.security.history}>
           <SparklinesLine />
         </Sparklines>
       </div>
@@ -22,12 +23,12 @@ export default (props) => (
       </div>
       <div className='level-item has-text-centered'>
         <div>
-          <span>$ 145.97</span>
+          <span>$ {props.security.price.toFixed(2)}</span>
         </div>
       </div>
       <div className='level-item has-text-centered'>
         <div>
-          <span> Yesterday 4:05 PM</span>
+          <span>{moment.isMoment(props.security.lastUpdate) ? props.security.lastUpdate.fromNow() : ''}</span>
         </div>
       </div>
     </nav>

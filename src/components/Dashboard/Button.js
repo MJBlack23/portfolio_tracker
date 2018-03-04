@@ -7,7 +7,7 @@ export default () => (
     <div className='container is-fluid'>
       <div className='columns'>
         <div className='column is-pulled-right'>
-          <Link to='/security/new' className='button is-primary is-rounded is-medium'>
+          <Link to='/security' className='button is-primary is-rounded is-medium'>
             <i className="fas fa-plus fa-fw"></i>
           </Link>
         </div>

@@ -1,5 +1,6 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 
 import securities from './securities';
@@ -11,5 +12,9 @@ const reducers = combineReducers({
 
 const persistReducers = persistReducer(persistConfig, reducers);
 
-export const store = createStore(persistReducers);
+export const store = createStore(
+  persistReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
+);
 export const persistor = persistStore(store);
