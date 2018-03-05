@@ -6,21 +6,21 @@ export default (props) => (
       <div className='level-item has-text-centered'>
         <div>
           <p className='heading'>AVG BUY</p>
-          <p className='title is-5'>$ 94.67</p>
+          <p className='title is-5'>$ {props.security.purchasePrice.toFixed(2)}</p>
         </div>
       </div>
 
       <div className='level-item has-text-centered'>
         <div>
           <p className='heading'>QUANTITY</p>
-          <p className='title is-5'>5</p>
+          <p className='title is-5'>{props.security.quantity}</p>
         </div>
       </div>
 
       <div className='level-item has-text-centered'>
         <div>
           <p className='heading'>GAIN/LOSS</p>
-          <p className='title is-5'>$96.78</p>
+          <p className='title is-5'>$ {((props.security.price - props.security.purchasePrice) * props.security.quantity).toFixed(2)}</p>
         </div>
       </div>
     </nav>

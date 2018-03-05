@@ -4,7 +4,7 @@ import { getValues } from '../../selectors/';
 
 import Summary from './Summary/';
 import Snapshot from './Snapshot';
-import Transactions from './Transactions';
+import Transaction from './Transaction';
 
 
 class Security extends Component {
@@ -19,9 +19,16 @@ class Security extends Component {
       <div style={{ paddingBottom: 50 }}>
         <Summary security={security} />
 
-        <Snapshot />
+        <Snapshot security={security} />
 
-        <Transactions />
+        <div className='container is-fluid'>
+          <h3 className='title is-6'>Transactions</h3>
+          { security.transactions.map(transaction => {
+            console.log(typeof transaction);
+            console.log(transaction.transaction);
+            return <Transaction transaction={transaction} key={transaction.uuid} />
+          })}
+        </div>
       </div>
     )
   }

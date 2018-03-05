@@ -13,6 +13,7 @@ export const getValues = createSelector(
       if (exists) {
         exists.quantity += transaction.quantity;
         exists.purchasePrice = (exists.purchasePrice + transaction.purchasePrice) / exists.quantity;
+        exists.transactions.push(transaction);
       } else {
         const price = securities[transaction.ticker] ? securities[transaction.ticker].lastUpdate.price : transaction.purchasePrice;
         response.push({
@@ -20,6 +21,7 @@ export const getValues = createSelector(
           price,
           lastUpdate: securities[transaction.ticker].lastUpdate.time,
           history: securities[transaction.ticker].history || [],
+          transactions: [transaction],
         });
       }
     });
